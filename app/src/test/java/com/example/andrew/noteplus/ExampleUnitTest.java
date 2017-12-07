@@ -1,4 +1,4 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 import org.junit.Test;
 

@@ -1,10 +1,9 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,45 +13,45 @@ import android.view.MenuItem;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends AppCompatActivity {
-    private static final String EXTRA_CRIME_ID = "com.example.android.criminalIntent.crime_id";
-    private static UUID crimeID;
+public class NotePagerActivity extends AppCompatActivity {
+    private static final String EXTRA_NOTE_ID = "com.example.android.noteplus.note_id";
+    private static UUID noteID;
     private ViewPager mViewPager;
-    private List<Crime> mCrimes;
+    private List<Note> mNotes;
 
 
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
-        crimeID = crimeId;
+    public static Intent newIntent(Context packageContext, UUID noteId) {
+        Intent intent = new Intent(packageContext, NotePagerActivity.class);
+        intent.putExtra(EXTRA_NOTE_ID, noteId);
+        noteID = noteId;
         return intent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crime_pager);
+        setContentView(R.layout.activity_note_pager);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mViewPager = findViewById(R.id.crime_view_pager);
-        mCrimes = CrimeLab.get(this).getCrimes();
+        mViewPager = findViewById(R.id.note_view_pager);
+        mNotes = NoteLab.get(this).getNotes();
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
             public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
+                Note note = mNotes.get(position);
+                return NoteFragment.newInstance(note.getId());
             }
 
             @Override
             public int getCount() {
-                return mCrimes.size();
+                return mNotes.size();
             }
         });
-        for (int i = 0; i < mCrimes.size(); i++) {
-            if (mCrimes.get(i).getId().equals(crimeID)) {
+        for (int i = 0; i < mNotes.size(); i++) {
+            if (mNotes.get(i).getId().equals(noteID)) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

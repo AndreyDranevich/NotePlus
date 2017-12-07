@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.andrew.criminalintent">
+    package="com.example.andrew.noteplus">
 
     <application
         android:allowBackup="true"
@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrimeListActivity">
+        <activity android:name="com.example.andrew.noteplus.NoteListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CrimePagerActivity"
-            android:label="@string/crime_details_activity">
+        <activity android:name="com.example.andrew.noteplus.NotePagerActivity"
+            android:label="@string/note_details_activity">
 
         </activity>
 

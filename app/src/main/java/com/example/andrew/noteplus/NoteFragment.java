@@ -1,4 +1,4 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 
 import android.app.Activity;
@@ -16,18 +16,19 @@ import android.widget.EditText;
 
 import java.util.UUID;
 
-//представление, отображает Crime. Контроллер
-public class CrimeFragment extends Fragment {
-    private static final String ARG_CRIME_ID = "crime_id";
-    private Crime mCrime;
+//представление, отображает Note. Контроллер
+public class NoteFragment extends Fragment {
+    private static final String ARG_CRIME_ID = "note_id";
+    private Note mNote;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
-    public static CrimeFragment newInstance(UUID crimeId) {
+
+    public static NoteFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
 
-        CrimeFragment fragment = new CrimeFragment();
+        NoteFragment fragment = new NoteFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,15 +37,15 @@ public class CrimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
+        mNote = NoteLab.get(getActivity()).getCrime(crimeId);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        View v = inflater.inflate(R.layout.fragment_note, container, false);
 
-        mTitleField = v.findViewById(R.id.crime_title);
-        mTitleField.setText(mCrime.getTitle());
+        mTitleField = v.findViewById(R.id.note_title);
+        mTitleField.setText(mNote.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
@@ -52,7 +53,7 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence c, int start, int before, int count) {
-                mCrime.setTitle(c.toString());
+                mNote.setTitle(c.toString());
             }
 
             @Override
@@ -60,18 +61,18 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mDateButton = v.findViewById(R.id.crime_date);
-        mDateButton.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy HH:mm", mCrime.getDate()));
+        mDateButton = v.findViewById(R.id.note_date);
+        mDateButton.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy HH:mm", mNote.getDate()));
         mDateButton.setEnabled(false);
 
-        mSolvedCheckBox = v.findViewById(R.id.crime_solved);
-        mSolvedCheckBox.setChecked(mCrime.isSolved());
+        mSolvedCheckBox = v.findViewById(R.id.note_solved);
+        mSolvedCheckBox.setChecked(mNote.isSolved());
 
 
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                mCrime.setSolved(b);
+                mNote.setSolved(b);
             }
         });
 

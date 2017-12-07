@@ -1,4 +1,4 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-public class CrimeListFragment extends Fragment {
-    private RecyclerView mCrimeRecyclerView;
+public class NoteListFragment extends Fragment {
+    private RecyclerView mNoteRecyclerView;
     private CrimeAdapter mAdapter;
     private static final int REQUEST_CRIME = 1;
-    private int holderPosition = 1;
+   // private int holderPosition = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
-        mCrimeRecyclerView = view.findViewById(R.id.crime_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_note_list, container, false);
+        mNoteRecyclerView = view.findViewById(R.id.note_recycler_view);
+        mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //GridLayoutManager for Grid
         updateUI();
         return view;
@@ -36,14 +35,14 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
+        NoteLab noteLab = NoteLab.get(getActivity());
+        List<Note> notes = noteLab.getNotes();
 
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mAdapter = new CrimeAdapter(notes);
+            mNoteRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.notifyItemChanged(holderPosition);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
@@ -51,27 +50,27 @@ public class CrimeListFragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
-        private Crime mCrime;
+        private Note mNote;
 
         public CrimeHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            mTitleTextView = itemView.findViewById(R.id.list_item_crime_title_text_view);
-            mDateTextView = itemView.findViewById(R.id.list_item_crime_date_text_view);
-            mSolvedCheckBox = itemView.findViewById(R.id.list_item_crime_solved_check_box);
+            mTitleTextView = itemView.findViewById(R.id.list_item_note_title_text_view);
+            mDateTextView = itemView.findViewById(R.id.list_item_note_date_text_view);
+            mSolvedCheckBox = itemView.findViewById(R.id.list_item_note_solved_check_box);
         }
 
-        public void bindCrime(Crime crime) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy HH:mm", mCrime.getDate()));
-            mSolvedCheckBox.setChecked(mCrime.isSolved());
+        public void bindCrime(Note note) {
+            mNote = note;
+            mTitleTextView.setText(mNote.getTitle());
+            mDateTextView.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy HH:mm", mNote.getDate()));
+            mSolvedCheckBox.setChecked(mNote.isSolved());
         }
 
         @Override
         public void onClick(View v) {
-            holderPosition = this.getAdapterPosition();
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
+            //holderPosition = this.getAdapterPosition();
+            Intent intent = NotePagerActivity.newIntent(getActivity(), mNote.getId());
             startActivityForResult(intent, REQUEST_CRIME);
         }
     }
@@ -83,29 +82,29 @@ public class CrimeListFragment extends Fragment {
 
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
-        private List<Crime> mCrimes;
+        private List<Note> mNotes;
 
 
-        public CrimeAdapter(List<Crime> crimes) {
-            mCrimes = crimes;
+        public CrimeAdapter(List<Note> notes) {
+            mNotes = notes;
         }
 
         @Override
         public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.list_item_crime, parent, false);
+            View view = layoutInflater.inflate(R.layout.list_item_note, parent, false);
             return new CrimeHolder(view);
         }
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-            Crime crime = mCrimes.get(position);
-            holder.bindCrime(crime);
+            Note note = mNotes.get(position);
+            holder.bindCrime(note);
         }
 
         @Override
         public int getItemCount() {
-            return mCrimes.size();
+            return mNotes.size();
         }
     }
 

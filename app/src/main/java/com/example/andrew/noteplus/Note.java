@@ -1,9 +1,9 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Crime {
+public class Note {
     private UUID mId;
     private String mTitle;
     private Date mDate;
@@ -25,7 +25,7 @@ public class Crime {
         mSolved = solved;
     }
 
-    public Crime() {
+    public Note() {
         mId = UUID.randomUUID();
         mDate = new Date();
     }

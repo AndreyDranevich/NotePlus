@@ -1,4 +1,4 @@
-package com.example.andrew.criminalintent;
+package com.example.andrew.noteplus;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
