@@ -3,15 +3,12 @@ package com.example.andrew.criminalintent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import java.util.UUID;
 
-public class CrimeActivity extends AppCompatActivity {
+public class CrimeActivity extends SingleFragmentActivity {
 
-    public static final String EXTRA_CRIME_ID = "com.example.android.criminalIntent.crime_id";
+    private static final String EXTRA_CRIME_ID = "com.example.android.criminalIntent.crime_id";
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, CrimeActivity.class);
@@ -19,19 +16,9 @@ public class CrimeActivity extends AppCompatActivity {
         return intent;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
-
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-        if (fragment == null) {
-            fragment = new CrimeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragmentContainer, fragment)
-                    .commit();
-        }
+    protected Fragment createFragment() {
+        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+        return CrimeFragment.newInstance(crimeId);
     }
+
 }
