@@ -6,8 +6,17 @@ import java.util.UUID;
 public class Note {
     private UUID mId;
     private String mTitle;
+    private String mSummary;
     private Date mDate;
     private boolean mSolved;
+
+    public String getSummary() {
+        return mSummary;
+    }
+
+    public void setSummary(String summary) {
+        mSummary = summary;
+    }
 
     public Date getDate() {
         return mDate;

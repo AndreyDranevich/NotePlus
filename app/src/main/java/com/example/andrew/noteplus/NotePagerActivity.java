@@ -32,9 +32,6 @@ public class NotePagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_pager);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         mViewPager = findViewById(R.id.note_view_pager);
         mNotes = NoteLab.get(this).getNotes();
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -23,17 +23,20 @@ public class NoteLab {
         mNotes = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Note note = new Note();
-            note.setTitle("Note #" + i);
-            note.setSolved(i % 2 == 0); // Для каждого второго объекта
+            note.setTitle("hello");
             mNotes.add(note);
         }
+    }
+
+    public void addNote(Note note) {
+        mNotes.add(note);
     }
 
     public List<Note> getNotes() {
         return mNotes;
     }
 
-    public Note getCrime(UUID id) {
+    public Note getNote(UUID id) {
         for (Note note : mNotes) {
             if (note.getId().equals(id)) {
                 return note;

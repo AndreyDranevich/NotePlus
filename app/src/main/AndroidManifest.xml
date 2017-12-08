@@ -16,8 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.andrew.noteplus.NotePagerActivity"
-            android:label="@string/note_details_activity">
-
+            android:label="@string/note_details_activity"
+            android:parentActivityName=".NoteListActivity">
         </activity>
 
     </application>

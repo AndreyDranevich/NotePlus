@@ -17,6 +17,13 @@
         android:hint="@string/note_title_hint"
         style="@style/FullWidthEditText"
         />
+    <EditText
+        android:id="@+id/note_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/note_summary_hint"
+        style="@style/FullWidthEditText"
+        />
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -26,6 +33,13 @@
 
     <Button
         android:id="@+id/note_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <Button
+        android:id="@+id/note_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

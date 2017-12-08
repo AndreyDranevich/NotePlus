@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Заметки</string>
-    <string name="note_title_hint">Введите преступление</string>
+    <string name="note_title_hint">Краткое описание</string>
+    <string name="note_summary_hint">Описание</string>
     <string name="note_title_label">Описание</string>
     <string name="note_details_label">Подробно</string>
     <string name="note_solved_label">Решено?</string>
-    <string name="note_details_activity">Подробно</string>
+    <string name="note_details_activity">Добавить!</string>
+    <string name="date_picker_title">Дата</string>
+    <string name="new_crime">Добавить!</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$s notes</string>
 </resources>
