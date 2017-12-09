@@ -21,7 +21,7 @@ public class NoteLab {
 
     private NoteLab(Context сontext) {
         mNotes = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             Note note = new Note();
             note.setTitle("hello");
             mNotes.add(note);

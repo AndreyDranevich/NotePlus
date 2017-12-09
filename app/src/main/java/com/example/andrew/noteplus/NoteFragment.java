@@ -30,7 +30,6 @@ public class NoteFragment extends Fragment {
     private EditText mSummaryField;
     private Button mTimeButton;
     private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
 
     public static NoteFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -102,28 +101,6 @@ public class NoteFragment extends Fragment {
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mNote.getDate());
                 dialog.setTargetFragment(NoteFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
-            }
-        });
-
-//
-//        mTimeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FragmentManager manager = getFragmentManager();
-//                TimePickerFragment dialog = TimePickerFragment.newInstance(mNote.getDate());
-//                dialog.setTargetFragment(NoteFragment.this, REQUEST_DATE);
-//                dialog.show(manager, DIALOG_DATE);
-//            }
-//        });
-
-        mSolvedCheckBox = v.findViewById(R.id.note_solved);
-        mSolvedCheckBox.setChecked(mNote.isSolved());
-
-
-        mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                mNote.setSolved(b);
             }
         });
 

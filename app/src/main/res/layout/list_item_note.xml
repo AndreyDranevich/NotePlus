@@ -1,44 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_margin="2dp">--><!--&lt;!&ndash;android:background="@drawable/background_border">&ndash;&gt;-->
+
+
+<!--<TextView--><!--android:id="@+id/list_item_note_title_text_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_alignParentLeft="true"--><!--android:layout_alignParentStart="true"--><!--android:layout_alignParentTop="true"--><!--android:padding="4dp"--><!--android:textStyle="bold"--><!--tools:text="Note Title" />-->
+
+<!--<TextView--><!--android:id="@+id/list_item_note_summary_text_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_below="@id/list_item_note_title_text_view"--><!--android:padding="4dp"--><!--android:textStyle="bold"--><!--tools:text="Note Summary" />-->
+
+<!--<TextView--><!--android:id="@+id/list_item_note_date_text_view"--><!--android:layout_width="match_parent"--><!--android:layout_height="wrap_content"--><!--android:layout_below="@id/list_item_note_summary_text_view"--><!--android:gravity="end"--><!--android:padding="4dp"--><!--android:textStyle="bold"--><!--tools:text="Note data" />--><!--</RelativeLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
-    android:background="@drawable/background_border">
+    android:orientation="vertical"
+    android:paddingTop="8dp">
 
-    <CheckBox
-        android:id="@+id/list_item_note_solved_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
-
-    <TextView
-        android:id="@+id/list_item_note_title_text_view"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:padding="4dp"
-        android:textStyle="bold"
-        tools:text="Note Title" />
-    <TextView
-        android:id="@+id/list_item_note_summary_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_note_title_text_view"
-        android:padding="4dp"
-        android:textStyle="bold"
-        tools:text="Note Summary" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
-    <TextView
-        android:id="@+id/list_item_note_date_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/list_item_note_summary_text_view"
-        android:layout_toLeftOf="@id/list_item_note_solved_check_box"
-        android:padding="4dp"
-        android:textStyle="bold"
-        tools:text="Note data" />
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/light_gray">
+
+            <TextView
+                android:id="@+id/list_item_note_title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Note Title" />
+
+            <TextView
+                android:id="@+id/list_item_note_summary_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Note Summary" />
+
+            <TextView
+                android:id="@+id/list_item_note_date_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                tools:text="Note Time" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -34,7 +34,7 @@ public class NoteListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_note_list, container, false);
 
         mNoteRecyclerView = view.findViewById(R.id.note_recycler_view);
-        mNoteRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //GridLayoutManager for Grid
         updateUI();
         return view;
@@ -81,7 +81,6 @@ public class NoteListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
-        private CheckBox mSolvedCheckBox;
         private TextView mSummaryTextView;
         private Note mNote;
 
@@ -90,7 +89,6 @@ public class NoteListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = itemView.findViewById(R.id.list_item_note_title_text_view);
             mDateTextView = itemView.findViewById(R.id.list_item_note_date_text_view);
-            mSolvedCheckBox = itemView.findViewById(R.id.list_item_note_solved_check_box);
             mSummaryTextView = itemView.findViewById(R.id.list_item_note_summary_text_view);
         }
 
@@ -98,8 +96,7 @@ public class NoteListFragment extends Fragment {
             mNote = note;
             mTitleTextView.setText(mNote.getTitle());
             mSummaryTextView.setText(mNote.getSummary());
-            mDateTextView.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy HH:mm", mNote.getDate()));
-            mSolvedCheckBox.setChecked(mNote.isSolved());
+            mDateTextView.setText(android.text.format.DateFormat.format("EEE, dd MMMM yyyy", mNote.getDate()));
         }
 
         @Override
