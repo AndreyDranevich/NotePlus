@@ -3,7 +3,6 @@ package com.example.andrew.noteplus;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,21 +11,31 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import java.util.List;
 
 public class NoteListFragment extends Fragment {
     private RecyclerView mNoteRecyclerView;
     private CrimeAdapter mAdapter;
-    private static final int REQUEST_CRIME = 1;
+    private static final int REQUEST_NOTE = 1;
     // private int holderPosition = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 
     @Override
@@ -38,11 +47,6 @@ public class NoteListFragment extends Fragment {
         //GridLayoutManager for Grid
         updateUI();
         return view;
-    }
-
-    public void onResume() {
-        super.onResume();
-        updateUI();
     }
 
     @Override
@@ -69,13 +73,52 @@ public class NoteListFragment extends Fragment {
     private void updateUI() {
         NoteLab noteLab = NoteLab.get(getActivity());
         List<Note> notes = noteLab.getNotes();
+        deleteCard();
 
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(notes);
             mNoteRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setNotes(notes);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void deleteCard() {
+        SwipeableRecyclerViewTouchListener swipeTouchListener =
+                new SwipeableRecyclerViewTouchListener(mNoteRecyclerView,
+                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+                            @Override
+                            public boolean canSwipeLeft(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public boolean canSwipeRight(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    Toast.makeText(getActivity(), R.string.delete_item, Toast.LENGTH_SHORT).show();
+                                    NoteLab.get(getActivity()).deleteNote(mAdapter.getNote(position));
+                                    mAdapter.notifyItemRemoved(position);
+                                }
+                                mAdapter.notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    Toast.makeText(getActivity(), R.string.delete_item, Toast.LENGTH_SHORT).show();
+                                    NoteLab.get(getActivity()).deleteNote(mAdapter.getNote(position));
+                                    mAdapter.notifyItemRemoved(position);
+                                }
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
+        mNoteRecyclerView.addOnItemTouchListener(swipeTouchListener);
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -103,19 +146,12 @@ public class NoteListFragment extends Fragment {
         public void onClick(View v) {
             //holderPosition = this.getAdapterPosition();
             Intent intent = NotePagerActivity.newIntent(getActivity(), mNote.getId());
-            startActivityForResult(intent, REQUEST_CRIME);
+            startActivityForResult(intent, REQUEST_NOTE);
         }
     }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CRIME) {
-        }
-    }
-
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
         private List<Note> mNotes;
-
 
         public CrimeAdapter(List<Note> notes) {
             mNotes = notes;
@@ -137,6 +173,19 @@ public class NoteListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mNotes.size();
+        }
+
+        public void setNotes(List<Note> notes) {
+            mNotes = notes;
+        }
+
+        public Note getNote(int position) {
+            return mNotes.remove(position);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_NOTE) {
         }
     }
 

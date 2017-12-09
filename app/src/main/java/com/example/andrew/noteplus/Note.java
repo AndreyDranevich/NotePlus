@@ -8,7 +8,6 @@ public class Note {
     private String mTitle;
     private String mSummary;
     private Date mDate;
-    private boolean mSolved;
 
     public String getSummary() {
         return mSummary;
@@ -19,6 +18,7 @@ public class Note {
     }
 
     public Date getDate() {
+        System.out.println(mDate);
         return mDate;
     }
 
@@ -26,16 +26,12 @@ public class Note {
         mDate = date;
     }
 
-    public boolean isSolved() {
-        return mSolved;
-    }
-
-    public void setSolved(boolean solved) {
-        mSolved = solved;
-    }
-
     public Note() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Note(UUID id){
+        mId=id;
         mDate = new Date();
     }
 
