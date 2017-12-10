@@ -3,18 +3,23 @@ package com.example.andrew.noteplus;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
+
+import com.android.colorpicker.ColorPickerDialog;
 
 import java.util.Date;
 import java.util.UUID;
@@ -22,8 +27,10 @@ import java.util.UUID;
 //представление, отображает Note. Контроллер
 public class NoteFragment extends Fragment {
     private static final String ARG_NOTE_ID = "note_id";
+    private static final String DIALOG_COLOUR = "DialogColour";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_COLOUR = 0;
 
     private Note mNote;
     private EditText mTitleField;
@@ -31,9 +38,9 @@ public class NoteFragment extends Fragment {
     private Button mTimeButton;
     private Button mDateButton;
 
-    public static NoteFragment newInstance(UUID crimeId) {
+    public static NoteFragment newInstance(UUID noteId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_NOTE_ID, crimeId);
+        args.putSerializable(ARG_NOTE_ID, noteId);
 
         NoteFragment fragment = new NoteFragment();
         fragment.setArguments(args);
@@ -43,6 +50,7 @@ public class NoteFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         UUID noteID = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
         mNote = NoteLab.get(getActivity()).getNote(noteID);
     }
@@ -52,6 +60,27 @@ public class NoteFragment extends Fragment {
         super.onPause();
         NoteLab.get(getActivity())
                 .updateNote(mNote);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_note, menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        int []colours = {Color.RED,Color.GRAY,Color.GREEN,Color.BLUE,Color.CYAN};
+       // R.color.red,R.color.blue,R.color.green,R.color.orange,
+        if (id == R.id.menu_item_new_colour) {
+            ColorPickerDialog colorPickerDialog = new ColorPickerDialog();
+            colorPickerDialog.initialize(
+                    R.string.add_colour,colours,Color.GRAY,5,10);
+            //colorPickerDialog.setTargetFragment(,REQUEST_DATE);
+            colorPickerDialog.show(getActivity().getFragmentManager(),DIALOG_COLOUR);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -104,10 +133,9 @@ public class NoteFragment extends Fragment {
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mNote.getDate());
                 dialog.setTargetFragment(NoteFragment.this, REQUEST_DATE);
-                dialog.show(manager, DIALOG_DATE);
+                dialog.show(getFragmentManager(), DIALOG_DATE);
             }
         });
 

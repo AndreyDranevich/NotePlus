@@ -2,8 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_item_new_crime"
-        android:icon="@drawable/ic_menu_add"
-        android:title="@string/new_note"
-        app:showAsAction="ifRoom"/>
+        android:id="@+id/menu_item_new_colour"
+        android:icon="@drawable/ic_add_colour"
+        android:title="@string/add_colour"
+        app:showAsAction="ifRoom" />
+
 </menu>

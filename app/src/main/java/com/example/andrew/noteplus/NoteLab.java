@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.andrew.noteplus.database.NoteBaseHelper;
 import com.example.andrew.noteplus.database.NoteDbSchema;
@@ -11,13 +13,16 @@ import com.example.andrew.noteplus.database.NoteDbSchema.NoteTable;
 import com.example.andrew.noteplus.database.NotesCursorWrapper;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
 //синглетный класс
 public class NoteLab {
-    private static NoteLab sNoteLab;
+    final String LOG_TAG = "myLogs";
 
+    private static NoteLab sNoteLab;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
@@ -31,6 +36,20 @@ public class NoteLab {
     private NoteLab(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new NoteBaseHelper(mContext).getWritableDatabase();
+        createFiveNotes();
+    }
+
+    public void createFiveNotes() {
+        NotesCursorWrapper cursor = queryNotes(null, null);
+        if (!cursor.moveToFirst()) {
+            for (int i = 0; i < 5; i++) {
+                Note note = new Note();
+                note.setTitle("hello #" + i);
+                note.setDate(new Date());
+                addNote(note);
+            }
+        }
+        cursor.close();
     }
 
     public void addNote(Note note) {
@@ -72,9 +91,10 @@ public class NoteLab {
         }
     }
 
-    public void deleteNote(Note note){
+    public void deleteNote(Note note) {
         String uuidString = note.getId().toString();
-        mDatabase.delete(NoteTable.NAME,NoteTable.Cols.UUID + " = ?", new String[]{uuidString});
+        Log.d(LOG_TAG, "Delete note id = " + uuidString);
+        mDatabase.delete(NoteTable.NAME, NoteTable.Cols.UUID + " = ?", new String[]{uuidString});
 
     }
 
@@ -89,7 +109,7 @@ public class NoteLab {
         values.put(NoteTable.Cols.UUID, note.getId().toString());
         values.put(NoteTable.Cols.TITLE, note.getTitle());
         values.put(NoteTable.Cols.SUMMARY, note.getSummary());
-        values.put(NoteTable.Cols.DATE, note.getDate().toString());
+        values.put(NoteTable.Cols.DATE, note.getDate().getTime());
 
         return values;
     }
@@ -106,4 +126,40 @@ public class NoteLab {
         );
         return new NotesCursorWrapper(cursor);
     }
+
+//    private class ReadFromDB extends AsyncTask<Void, Void, Void> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            super.onPostExecute(result);
+//        }
+//    }
+//
+//    private class WriteInDB extends AsyncTask<Void, Void, Void> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            super.onPostExecute(result);
+//        }
+//    }
 }

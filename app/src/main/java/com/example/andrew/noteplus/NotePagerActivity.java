@@ -62,6 +62,9 @@ public class NotePagerActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             finish();
         }
+        if(id == R.id.menu_item_new_colour){
+            finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }

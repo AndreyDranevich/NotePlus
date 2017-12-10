@@ -5,20 +5,20 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import java.util.UUID;
-
+//need to delete
 public class NoteActivity extends SingleFragmentActivity {
 
-    private static final String EXTRA_CRIME_ID = "com.example.android.noteplus.crime_id";
+    private static final String EXTRA_NOTE_ID = "com.example.android.noteplus.note_id";
 
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
+    public static Intent newIntent(Context packageContext, UUID noteId) {
         Intent intent = new Intent(packageContext, NoteActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
+        intent.putExtra(EXTRA_NOTE_ID, noteId);
         return intent;
     }
 
     protected Fragment createFragment() {
-        UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
-        return NoteFragment.newInstance(crimeId);
+        UUID noteId = (UUID) getIntent().getSerializableExtra(EXTRA_NOTE_ID);
+        return NoteFragment.newInstance(noteId);
     }
 
 }
