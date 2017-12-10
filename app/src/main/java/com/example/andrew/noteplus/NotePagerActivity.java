@@ -63,9 +63,9 @@ public class NotePagerActivity extends AppCompatActivity {
             finish();
         }
         if(id == R.id.menu_item_new_colour){
-            finish();
+            //finish();
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

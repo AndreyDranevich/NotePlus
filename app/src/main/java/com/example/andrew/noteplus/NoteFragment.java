@@ -19,8 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.colorpicker.ColorPickerDialog;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -73,11 +71,11 @@ public class NoteFragment extends Fragment {
         int []colours = {Color.RED,Color.GRAY,Color.GREEN,Color.BLUE,Color.CYAN};
        // R.color.red,R.color.blue,R.color.green,R.color.orange,
         if (id == R.id.menu_item_new_colour) {
-            ColorPickerDialog colorPickerDialog = new ColorPickerDialog();
-            colorPickerDialog.initialize(
-                    R.string.add_colour,colours,Color.GRAY,5,10);
-            //colorPickerDialog.setTargetFragment(,REQUEST_DATE);
-            colorPickerDialog.show(getActivity().getFragmentManager(),DIALOG_COLOUR);
+//            ColorPickerDialog colorPickerDialog = new ColorPickerDialog();
+//            colorPickerDialog.initialize(
+//                    R.string.add_colour,colours,Color.GRAY,5,10);
+//            //colorPickerDialog.setTargetFragment(,REQUEST_DATE);
+//            colorPickerDialog.show(getActivity().getFragmentManager(),DIALOG_COLOUR);
         }
 
         return super.onOptionsItemSelected(item);

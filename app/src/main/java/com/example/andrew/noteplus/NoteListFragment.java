@@ -25,7 +25,6 @@ public class NoteListFragment extends Fragment {
     private static final int REQUEST_NOTE = 1;
     // private int holderPosition = 1;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +66,7 @@ public class NoteListFragment extends Fragment {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+
         }
     }
 
