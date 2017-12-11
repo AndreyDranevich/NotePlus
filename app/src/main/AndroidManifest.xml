@@ -9,17 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.andrew.noteplus.NoteListActivity">
+        <activity android:name=".activity.NoteListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.andrew.noteplus.NotePagerActivity"
+        <activity
+            android:name=".activity.NotePagerActivity"
             android:label="@string/note_details_activity"
-            android:parentActivityName=".NoteListActivity">
-        </activity>
-
+            android:parentActivityName=".activity.NoteListActivity" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:label="@string/action_settings"
+            android:parentActivityName=".activity.NoteListActivity" />
     </application>
 
 </manifest>

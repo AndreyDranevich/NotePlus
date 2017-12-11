@@ -9,9 +9,10 @@
     <string name="note_details_activity">Add!</string>
     <string name="date_picker_title">Data</string>
     <string name="new_note">Add!</string>
-    <string name="show_subtitle">Show Subtitle</string>
-    <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="subtitle_format">%1$s notes</string>
     <string name="delete_item">Delete!</string>
     <string name="add_colour">Select background color</string>
+    <string name="action_settings">About author</string>
+    <string name="about_up">Notes</string>
+    <string name="about_down">Andrew Dranevich</string>
+    <string name="email">andreydran7@gmail.com</string>
 </resources>

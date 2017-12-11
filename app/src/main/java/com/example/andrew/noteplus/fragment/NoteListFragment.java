@@ -1,4 +1,4 @@
-package com.example.andrew.noteplus;
+package com.example.andrew.noteplus.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.andrew.noteplus.Note;
+import com.example.andrew.noteplus.NoteLab;
+import com.example.andrew.noteplus.R;
+import com.example.andrew.noteplus.activity.NotePagerActivity;
+import com.example.andrew.noteplus.activity.SettingsActivity;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import java.util.List;
@@ -64,6 +69,11 @@ public class NoteListFragment extends Fragment {
                 Intent intent = NotePagerActivity.newIntent(getActivity(), note.getId());
                 startActivity(intent);
                 return true;
+            case R.id.action_settings:
+                Intent intent1 = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent1);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -188,5 +198,4 @@ public class NoteListFragment extends Fragment {
         if (requestCode == REQUEST_NOTE) {
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.andrew.noteplus;
+package com.example.andrew.noteplus.fragment;
 
 
 import android.app.Activity;
@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,6 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.andrew.noteplus.Note;
+import com.example.andrew.noteplus.NoteLab;
+import com.example.andrew.noteplus.R;
 
 import java.util.Date;
 import java.util.UUID;
@@ -76,6 +80,7 @@ public class NoteFragment extends Fragment {
 //                    R.string.add_colour,colours,Color.GRAY,5,10);
 //            //colorPickerDialog.setTargetFragment(,REQUEST_DATE);
 //            colorPickerDialog.show(getActivity().getFragmentManager(),DIALOG_COLOUR);
+
         }
 
         return super.onOptionsItemSelected(item);

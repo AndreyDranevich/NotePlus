@@ -5,12 +5,13 @@
     <string name="note_title_label">Описание</string>
     <string name="note_details_label">Подробно</string>
     <string name="note_solved_label">Решено?</string>
-    <string name="note_details_activity">Добавить!</string>
+    <string name="note_details_activity">Изменение</string>
     <string name="date_picker_title">Дата</string>
     <string name="new_note">Добавить!</string>
-    <string name="show_subtitle">Show Subtitle</string>
-    <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="subtitle_format">%1$s notes</string>
     <string name="delete_item">Удалено!</string>
     <string name="add_colour">Выбрать цвет фона</string>
+    <string name="action_settings">Об авторе</string>
+    <string name="about_up">Заметки</string>
+    <string name="about_down">Драневич Андрей</string>
+    <string name="email">andreydran7@gmail.com</string>
 </resources>

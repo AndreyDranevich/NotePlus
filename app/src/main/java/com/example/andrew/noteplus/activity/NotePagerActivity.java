@@ -1,4 +1,4 @@
-package com.example.andrew.noteplus;
+package com.example.andrew.noteplus.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.andrew.noteplus.Note;
+import com.example.andrew.noteplus.fragment.NoteFragment;
+import com.example.andrew.noteplus.NoteLab;
+import com.example.andrew.noteplus.R;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,9 +67,9 @@ public class NotePagerActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             finish();
         }
-        if(id == R.id.menu_item_new_colour){
-            //finish();
-        }
+//        if(id == R.id.menu_item_new_colour){
+//           //finish();
+//        }
 
         return true;
     }

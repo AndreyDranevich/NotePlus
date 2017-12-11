@@ -1,7 +1,8 @@
-package com.example.andrew.noteplus;
+package com.example.andrew.noteplus.fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,19 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
+import com.example.andrew.noteplus.R;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-//need to delete
-public class TimePickerFragment extends DialogFragment {
+
+public class DatePickerFragment extends DialogFragment {
     public static final String EXTRA_DATE = "com.example.android.noteplus.date";
     private static final String ARG_DATE = "date";
     private DatePicker mDatePicker;
 
-    public static TimePickerFragment newInstance(Date date) {
+    public static DatePickerFragment newInstance(Date date) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_DATE, date);
-        TimePickerFragment fragment = new TimePickerFragment();
+        DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
         return fragment;
     }
