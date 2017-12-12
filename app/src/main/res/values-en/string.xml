@@ -12,7 +12,7 @@
     <string name="delete_item">Delete!</string>
     <string name="add_colour">Select background color</string>
     <string name="action_settings">About author</string>
-    <string name="about_up">Notes</string>
-    <string name="about_down">Andrew Dranevich</string>
-    <string name="email">andreydran7@gmail.com</string>
+    <string name="about_up">Notes\nAndrew Dranevich\nandreydran7@gmail.com</string>
+    <string name="hello_title">Hello!</string>
+    <string name="hello_summary">It\'s your first note</string>
 </resources>

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.example.andrew.noteplus.Note;
 import com.example.andrew.noteplus.fragment.NoteFragment;
@@ -60,17 +59,4 @@ public class NotePagerActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            finish();
-        }
-//        if(id == R.id.menu_item_new_colour){
-//           //finish();
-//        }
-
-        return true;
-    }
 }

@@ -1,6 +1,8 @@
 package com.example.andrew.noteplus.fragment;
 
 import android.content.Intent;
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +23,8 @@ import com.example.andrew.noteplus.NoteLab;
 import com.example.andrew.noteplus.R;
 import com.example.andrew.noteplus.activity.NotePagerActivity;
 import com.example.andrew.noteplus.activity.SettingsActivity;
+import com.example.andrew.noteplus.task.DeletedNoteTask;
+import com.example.andrew.noteplus.task.InsertNoteTask;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
 import java.util.List;
@@ -64,10 +69,7 @@ public class NoteListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_new_crime:
                 Note note = new Note();
-                NoteLab.get(getActivity()).addNote(note);
-
-                Intent intent = NotePagerActivity.newIntent(getActivity(), note.getId());
-                startActivity(intent);
+                new InsertNoteTask(getActivity(), note).execute();
                 return true;
             case R.id.action_settings:
                 Intent intent1 = new Intent(getActivity(), SettingsActivity.class);
@@ -111,8 +113,9 @@ public class NoteListFragment extends Fragment {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
+                                    new DeletedNoteTask(getActivity(), mAdapter.getNote(position)).execute();
                                     Toast.makeText(getActivity(), R.string.delete_item, Toast.LENGTH_SHORT).show();
-                                    NoteLab.get(getActivity()).deleteNote(mAdapter.getNote(position));
+
                                     mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();
@@ -121,8 +124,9 @@ public class NoteListFragment extends Fragment {
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
+                                    new DeletedNoteTask(getActivity(), mAdapter.getNote(position)).execute();
                                     Toast.makeText(getActivity(), R.string.delete_item, Toast.LENGTH_SHORT).show();
-                                    NoteLab.get(getActivity()).deleteNote(mAdapter.getNote(position));
+
                                     mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();
@@ -155,10 +159,12 @@ public class NoteListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             //holderPosition = this.getAdapterPosition();
+
             Intent intent = NotePagerActivity.newIntent(getActivity(), mNote.getId());
             startActivityForResult(intent, REQUEST_NOTE);
         }
     }
+
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
         private List<Note> mNotes;

@@ -4,11 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.example.andrew.noteplus.database.NoteBaseHelper;
-import com.example.andrew.noteplus.database.NoteDbSchema;
 import com.example.andrew.noteplus.database.NoteDbSchema.NoteTable;
 import com.example.andrew.noteplus.database.NotesCursorWrapper;
 
@@ -36,18 +35,17 @@ public class NoteLab {
     private NoteLab(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new NoteBaseHelper(mContext).getWritableDatabase();
-        createFiveNotes();
+        createHelloNote();
     }
 
-    public void createFiveNotes() {
+    public void createHelloNote() {
         NotesCursorWrapper cursor = queryNotes(null, null);
         if (!cursor.moveToFirst()) {
-            for (int i = 0; i < 5; i++) {
-                Note note = new Note();
-                note.setTitle("hello #" + i);
-                note.setDate(new Date());
-                addNote(note);
-            }
+            Note note = new Note();
+            note.setTitle(mContext.getString(R.string.hello_title));
+            note.setSummary(mContext.getString(R.string.hello_summary));
+            note.setDate(new Date());
+            addNote(note);
         }
         cursor.close();
     }
@@ -126,40 +124,4 @@ public class NoteLab {
         );
         return new NotesCursorWrapper(cursor);
     }
-
-//    private class ReadFromDB extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//        }
-//    }
-//
-//    private class WriteInDB extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            super.onPostExecute(result);
-//        }
-//    }
 }

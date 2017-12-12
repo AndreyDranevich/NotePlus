@@ -11,7 +11,7 @@
     <string name="delete_item">Удалено!</string>
     <string name="add_colour">Выбрать цвет фона</string>
     <string name="action_settings">Об авторе</string>
-    <string name="about_up">Заметки</string>
-    <string name="about_down">Драневич Андрей</string>
-    <string name="email">andreydran7@gmail.com</string>
+    <string name="about_up">Заметки\nДраневич Андрей\nandreydran7@gmail.com\n</string>
+    <string name="hello_title">Привет!</string>
+    <string name="hello_summary">Это твоя первая заметка</string>
 </resources>

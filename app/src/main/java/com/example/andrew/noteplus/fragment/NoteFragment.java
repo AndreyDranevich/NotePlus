@@ -3,36 +3,32 @@ package com.example.andrew.noteplus.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.example.andrew.noteplus.Note;
 import com.example.andrew.noteplus.NoteLab;
 import com.example.andrew.noteplus.R;
+import com.example.andrew.noteplus.task.UpdateNoteTask;
+
 
 import java.util.Date;
 import java.util.UUID;
 
-//представление, отображает Note. Контроллер
+
 public class NoteFragment extends Fragment {
     private static final String ARG_NOTE_ID = "note_id";
-    private static final String DIALOG_COLOUR = "DialogColour";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
-    private static final int REQUEST_COLOUR = 0;
 
     private Note mNote;
     private EditText mTitleField;
@@ -53,6 +49,7 @@ public class NoteFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
         UUID noteID = (UUID) getArguments().getSerializable(ARG_NOTE_ID);
         mNote = NoteLab.get(getActivity()).getNote(noteID);
     }
@@ -60,30 +57,7 @@ public class NoteFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        NoteLab.get(getActivity())
-                .updateNote(mNote);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_note, menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        int []colours = {Color.RED,Color.GRAY,Color.GREEN,Color.BLUE,Color.CYAN};
-       // R.color.red,R.color.blue,R.color.green,R.color.orange,
-        if (id == R.id.menu_item_new_colour) {
-//            ColorPickerDialog colorPickerDialog = new ColorPickerDialog();
-//            colorPickerDialog.initialize(
-//                    R.string.add_colour,colours,Color.GRAY,5,10);
-//            //colorPickerDialog.setTargetFragment(,REQUEST_DATE);
-//            colorPickerDialog.show(getActivity().getFragmentManager(),DIALOG_COLOUR);
-
-        }
-
-        return super.onOptionsItemSelected(item);
+        new UpdateNoteTask(getActivity(),mNote).execute();
     }
 
     @Override
