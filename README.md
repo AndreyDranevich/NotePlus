@@ -8,5 +8,5 @@ Now implemented:
 - icon for different density and size of display
 - toast and dialogs
 - list with arbitrary markup elements
-- DB - SQLite
-(a list will be complemented)
+- DB - SQLite, AsyncTask
+- (a list will be complemented)
