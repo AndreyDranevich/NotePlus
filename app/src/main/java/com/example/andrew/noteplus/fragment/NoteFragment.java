@@ -57,7 +57,7 @@ public class NoteFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        new UpdateNoteTask(getActivity(),mNote).execute();
+        new UpdateNoteTask(getActivity(), mNote).execute();
     }
 
     @Override
@@ -116,6 +116,7 @@ public class NoteFragment extends Fragment {
             }
         });
 
+
         return v;
     }
 
@@ -133,6 +134,7 @@ public class NoteFragment extends Fragment {
             mNote.setDate(date);
             updateDate();
         }
+
     }
 
     private void updateDate() {
