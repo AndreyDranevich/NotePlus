@@ -33,7 +33,7 @@ public class NoteListFragment extends Fragment {
     private RecyclerView mNoteRecyclerView;
     private CrimeAdapter mAdapter;
     private static final int REQUEST_NOTE = 1;
-    // private int holderPosition = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class NoteListFragment extends Fragment {
 
         mNoteRecyclerView = view.findViewById(R.id.note_recycler_view);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //GridLayoutManager for Grid
+
         updateUI();
         return view;
     }
