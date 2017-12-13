@@ -9,4 +9,4 @@ Now implemented:
 - toast and dialogs
 - list with arbitrary markup elements
 - DB - SQLite, AsyncTask
-- (a list will be complemented)
+- Services (Notification, Firebase)
